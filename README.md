@@ -1,13 +1,52 @@
-# Overview
+# Event-app API
+
+This repository contains source code of simple application to exam US events domain and 
+[Eventbrite](https://www.eventbrite.com) data provider via their API v3.
+
+Application provides API with included support of API versions based on common RESTful API versioning (i.e. 
+_/api/v1/..._, _/api/v2/..._ etc.)
+
+**Technology stack:**
+
+* Python 3.7 / Django 2.1
+* PostgreSQL 9.6 (but it should work for every DB compatible with Django)
+* Some useful Django batteries (see below for boilerplate documentation).
+
+
+## Installation
+
+Setup following system environment variables:
+
+```bash
+# Below is a connection URI for local environment based on docker (see /docker_compose.yaml)
+export DATABASE_URL=postgresql://localroot:localrootpass@localhost:5432/app
+export EVENTBRITE_OAUTH_TOKEN=XXXXXXX
+
+# For default APP_ENVIRONMENT=dev
+export APP_ENVIRONMENT=prod
+
+# Domains should be divided be comma
+export APP_CORS_WHITELIST=http://localhost,http://example.com
+
+# It can be True or False. False is default for prod environment
+export CORS_ORIGIN_ALLOW_ALL=False
+
+```
+
+
+
+## Overview
 
 This django boilerplate had been done to solve some routine with creating new environment, installing based batteries 
 etc.
 
-## Specifics
+[Go to boilerplate repository](https://github.com/alexshin/django-boilerplate)
+
+### Specifics
 
 It's used some specifics tools to make your programming process easier.
 
-##### Docker and docker-compose
+###### Docker and docker-compose
 
 In the root of project you can find `docker-compose.yaml` which contains some containers with databases.
 
@@ -15,12 +54,12 @@ All credentials which is used in development process are open and they are in do
 in dev/test settings. For production purposes I recommend to use System Environment Variables or 
 some secure tools sush as Hashi Corp Vault etc.
 
-##### Dependencies
+###### Dependencies
 
 All needed dependencies are in the root directory in file `requirements.txt`. If you will change some versions, 
 please don't forget to launch tests.
 
-##### Environment settings
+###### Environment settings
 
 Boilerplate contains three different environments:
 
@@ -28,9 +67,9 @@ Boilerplate contains three different environments:
 * _Testing_ - it's the same as Development except debug tools and other redundant apps
 * _Production_ - boilerplate doesn't contain ready to use settings cause you _REALLY NEED TO DO IT YOURSELF_
 
-## Additional batteries
+### Additional batteries
 
-#### Django-channels
+##### Django-channels
 
 Recently almost all the projects should use realtime communication between client and server. In this case there 
 are not a lot of options. Django-channels enable you to use web-sockets as simple as possible.
@@ -39,7 +78,7 @@ are not a lot of options. Django-channels enable you to use web-sockets as simpl
 
 Check more detail information in [documentation of django-channels](http://channels.readthedocs.io/en/latest/)
 
-#### Django-guardian
+##### Django-guardian
 
 This battery allows you to use Object-Level-Permissions against Class-Level-Permissions which exists in Django by 
 default.
@@ -48,27 +87,27 @@ If you don't know about Django-guardian, you should check
 [the documentation](https://django-guardian.readthedocs.io/en/stable/) ASAP. It will help you in every application
 you will create on Django.
 
-#### drf-yasg
+##### drf-yasg
 
 Yet another swagger generator helps to generate OpenAPI schema and viewer for Django Rest Framework views. See more 
 docs in [official documentation](https://drf-yasg.readthedocs.io/en/stable/index.html)
 
 _In dev environment you can check schema by `http://127.0.0.1:8000/swagger/` or `http://127.0.0.1:8000/redoc/`_
 
-#### django-cors-headers
+##### django-cors-headers
 
 Added headers to enable CORS. For more information see 
 [official documentation](https://github.com/ottoyiu/django-cors-headers/)
 
-## Usage
+### Usage
 
-### Requirements
+#### Requirements
 
 * Python 3.7
 * Docker and Docker-compose (min version of Docker-compose format is 3.1)
 
 
-### Quick start
+#### Quick start
 
 ```bash
 # Create project directory
@@ -96,7 +135,7 @@ Then you can remove git history `rm -rf ./.git`
 And start your own project. Enjoy it =)
 
 
-### Working with initial data
+#### Working with initial data
 
 The boilerplate contains some basic modifications to work with initial data. Django has already had the same mechanism
 name "fixtures". But it works not very comfortable for real-world applications because need to append specific
@@ -108,7 +147,7 @@ Faker and Factory Boy to make creating of Django entities more smoothly but you 
 Fixtures automatically apply after migrations in testing environment. In other environments you should execute console 
 command `apply_migrations`.
 
-## Contributing
+### Contributing
 
 You can be free to ask me questions and suggest new batteries or changes. 
 

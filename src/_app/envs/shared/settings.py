@@ -18,6 +18,8 @@ INSTALLED_APPS = [
 
     # Service
     '_app.initial_data',
+    'event',
+    'event.providers.eventbrite_provider',
 
     # App
     'user',
@@ -112,7 +114,7 @@ ANONYMOUS_USER_NAME = 'anonymous@example.com'
 SUPERUSER_USER_NAME = 'admin@example.com'
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend', # this is default
+    'django.contrib.auth.backends.ModelBackend',  # this is default
     'guardian.backends.ObjectPermissionBackend',
 )
 
