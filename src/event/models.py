@@ -14,7 +14,7 @@ class ProviderMixin(TimestampMixin, models.Model):
     is_actual = models.BooleanField('Is actual', null=False, default=False)
 
     class Meta:
-        unique_together = ('id', 'provider_object_id')
+        unique_together = ('provider', 'provider_object_id')
         indexes = [
             models.Index(fields=['provider', 'is_actual'])
         ]
@@ -41,8 +41,8 @@ class Organizer(ProviderMixin, models.Model):
     name = models.CharField('Name', max_length=255, blank=False)
     uri = models.URLField('URL', blank=True)
 
-    description_plain = models.TextField('Description (text)', blank=True, help_text='plain text')
-    description_html = models.TextField('Organizer description', blank=True, help_text='html')
+    description_plain = models.TextField('Description (text)', blank=True, null=True, help_text='plain text')
+    description_html = models.TextField('Organizer description', blank=True, null=True, help_text='html')
 
     logo_uri = models.URLField('Logo URI', blank=True)
 
@@ -65,8 +65,8 @@ class Event(ProviderMixin, models.Model):
     name = models.CharField('Name', max_length=255, blank=False)
     uri = models.URLField('URL', blank=True)
 
-    description_plain = models.TextField('Description (text)', blank=True, help_text='plain text')
-    description_html = models.TextField('Organizer description', blank=True, help_text='html')
+    description_plain = models.TextField('Description (text)', blank=True, null=True, help_text='plain text')
+    description_html = models.TextField('Organizer description', blank=True, null=True, help_text='html')
 
     category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
     organizer = models.ForeignKey(Organizer, null=False, on_delete=models.CASCADE)
@@ -74,9 +74,9 @@ class Event(ProviderMixin, models.Model):
     start_time = models.DateTimeField('Start time', null=True)
     finish_time = models.DateTimeField('Finish time', null=True)
 
-    ticket_price_currency = models.CharField('Currency', max_length=3)
-    min_ticket_price = models.DecimalField('Minimum ticket price', decimal_places=4, max_digits=12)
-    max_ticket_price = models.DecimalField('Maximum ticket price', decimal_places=4, max_digits=12)
+    ticket_price_currency = models.CharField('Currency', max_length=3, null=True)
+    min_ticket_price = models.DecimalField('Minimum ticket price', decimal_places=4, max_digits=12, null=True)
+    max_ticket_price = models.DecimalField('Maximum ticket price', decimal_places=4, max_digits=12, null=True)
 
     changed_by_provider_hash = models.CharField('Changed by provider hash', null=True, max_length=32)  # md5 hash
 
