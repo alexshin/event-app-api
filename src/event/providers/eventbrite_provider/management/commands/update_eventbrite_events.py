@@ -25,7 +25,7 @@ class Command(BaseCommand):
         self.stdout.write('Start grab data')
 
         writer = self.stdout.write
-        self.update_service.process_events(count=options['count'],
+        self.update_service.process_events(count=int(options['count']),
                                            processed_event_callback=lambda x: writer(f'[*] #{x.id} {x.name}'))
 
         self.stdout.write('Successfully imported!')

@@ -144,13 +144,13 @@ class EventbritePaginatedIterator(Iterator):
     def _get_page(self, page_number=1):
         res = self.api_method(page=page_number, **self.query_args)
         if not hasattr(res, 'status_code') or res.status_code != 200:
-            raise eventbrite_exceptions.EventbriteException('Something goes wrong while getting new records')
-        if 'pagination' not in res:
+            raise eventbrite_exceptions.EventbriteException(f'Something goes wrong while getting new records / {res}')
+        if not hasattr(res, 'pagination'):
             raise eventbrite_exceptions.EventbriteException('Iterator is waiting pagination response')
         if self.root_key not in res:
-            raise eventbrite_exceptions.EventbriteException(f'Response must have "{self.root_key}" key')
+            raise eventbrite_exceptions.EventbriteException(f'Response must have "{self.root_key}" attr')
 
-        has_next = int(res['pagination']['page_count']) > page_number
+        has_next = int(res.pagination['page_count']) > page_number
 
         return has_next, res[self.root_key]
 
