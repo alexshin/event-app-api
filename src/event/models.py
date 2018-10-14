@@ -2,7 +2,7 @@ from django.contrib.postgres.fields import JSONField
 from django.db import models
 from .providers.settings import EVENT_PROVIDERS
 
-from utils.model_mixings import TimestampMixin
+from utils.model_mixins import TimestampMixin
 
 
 class ProviderMixin(TimestampMixin, models.Model):
@@ -35,6 +35,7 @@ class Category(ProviderMixin, models.Model):
             ('provider', 'name'),
             ProviderMixin.Meta.unique_together
         ]
+        ordering = ('name',)
 
 
 class Organizer(ProviderMixin, models.Model):
@@ -58,7 +59,8 @@ class Organizer(ProviderMixin, models.Model):
     class Meta(ProviderMixin.Meta):
         db_table = 'event_provider_organizer'
         verbose_name = 'organizer'
-        verbose_name_plural = 'organizer'
+        verbose_name_plural = ('organizer',)
+        ordering = ('name',)
 
 
 class Event(ProviderMixin, models.Model):
@@ -97,3 +99,4 @@ class Event(ProviderMixin, models.Model):
         db_table = 'event_provider_event'
         verbose_name = 'event'
         verbose_name_plural = 'event'
+        ordering = ('-start_time',)

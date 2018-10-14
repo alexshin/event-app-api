@@ -21,5 +21,6 @@ APPLICATION_URLS = [
 
     # API
     path('api/v1/app/', include('_app.api.v1.urls')),
+    path('', include('event.urls')),
     path('', include('user.urls'))  # Each application should think about unique urls itself =(
 ]
