@@ -31,6 +31,9 @@ class OrganizerUpdateSerializer(ModelSerializer):
 
 
 class EventListSerializer(ModelSerializer):
+    category = CategorySerializer()
+    organizer = OrganizerListSerializer()
+
     class Meta:
         model = Event
         fields = ['id', 'provider', 'name', 'uri', 'category', 'organizer', 'start_time', 'finish_time',

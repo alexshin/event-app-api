@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.conf import settings
 from rest_framework.test import APITestCase, APIClient
+from abc import ABCMeta, abstractmethod
 
 USERS = settings.USERS
 NOT_VERIFIED_USERS = settings.EMAIL_IS_NOT_VERIFIED_USERS
@@ -12,7 +13,7 @@ User = get_user_model()
 
 class AuthorizedAPITestCase(APITestCase):
     def _get_token(self):
-        response = self.client.post('/api/v1/user/token/',
+        response = self.client.post('/api/v1/users/token/',
                                     data=json.dumps(self.credentials),
                                     content_type='application/json')
 
