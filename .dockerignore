@@ -1,0 +1,5 @@
+docker-compose.yaml
+venv
+.idea
+data
+*/**/__pycache__/
