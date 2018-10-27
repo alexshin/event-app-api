@@ -8,3 +8,4 @@ django-guardian==1.4.9
 django-post_office==3.0.4
 django-cors-headers==2.4.0
 eventbrite==3.3.3
+django-redis==4.9.0
