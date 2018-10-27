@@ -10,3 +10,4 @@ django-cors-headers==2.4.0
 eventbrite==3.3.3
 django-redis==4.9.0
 channels_redis==2.3.1
+sentry-sdk==0.5.1

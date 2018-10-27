@@ -46,3 +46,13 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+SENTRY_DSN = getenv('SENTRY_DSN', None)
+if SENTRY_DSN is not None:
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration()]
+    )
