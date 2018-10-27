@@ -47,6 +47,10 @@ CHANNEL_LAYERS = {
     },
 }
 
+INSTALLED_APPS += ['drf_yasg',]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
 SENTRY_DSN = getenv('SENTRY_DSN', None)
 if SENTRY_DSN is not None:
     import sentry_sdk
