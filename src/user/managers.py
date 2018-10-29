@@ -23,6 +23,8 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, password, **extra_fields):
+        extra_fields.setdefault('is_active', True)
+
         email = extra_fields.get('email', None)
         username = extra_fields.get('username', None)
 
