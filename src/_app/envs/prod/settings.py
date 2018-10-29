@@ -60,3 +60,11 @@ if SENTRY_DSN is not None:
         dsn=SENTRY_DSN,
         integrations=[DjangoIntegration()]
     )
+
+
+EMAIL_BACKEND = 'post_office.EmailBackend'
+EMAIL_HOST = getenv('APP_EMAIL_HOST', 'smtp.mailgun.org')
+EMAIL_PORT = getenv('APP_EMAIL_PORT', 587)
+EMAIL_HOST_USER = getenv('APP_EMAIL_USER', 'postmaster@mg.my-events.site')
+EMAIL_HOST_PASSWORD = getenv('APP_EMAIL_PASS', 'q1w2e3r4t5y6')
+EMAIL_USE_TLS = True
