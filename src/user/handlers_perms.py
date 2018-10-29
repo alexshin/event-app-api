@@ -11,6 +11,7 @@ SUPERUSER_USER_NAME = settings.SUPERUSER_USER_NAME
 GROUPS = settings.GROUPS
 
 from .signals import user_registered, user_email_confirmed
+from .utils import send_verification_code
 
 """
 It's not a good idea to assign users here because hard binding,
@@ -27,6 +28,7 @@ def add_user_to_base_group(sender, user: User, plain_password: str, **kwargs):
         user.groups.add(group)
 
         assign_perm('user.validate_email', user, obj=user)
+        send_verification_code(user, plain_password)
 
 
 @receiver(user_email_confirmed)
