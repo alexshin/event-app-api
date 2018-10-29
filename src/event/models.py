@@ -36,6 +36,9 @@ class Category(ProviderMixin, models.Model):
             ProviderMixin.Meta.unique_together
         ]
         ordering = ('name',)
+        indexes = ProviderMixin.Meta.indexes + [
+            models.Index(fields=('name',))
+        ]
 
 
 class Organizer(ProviderMixin, models.Model):
@@ -61,6 +64,9 @@ class Organizer(ProviderMixin, models.Model):
         verbose_name = 'organizer'
         verbose_name_plural = ('organizer',)
         ordering = ('name',)
+        indexes = ProviderMixin.Meta.indexes + [
+            models.Index(fields=('name',))
+        ]
 
 
 class Event(ProviderMixin, models.Model):
@@ -100,3 +106,10 @@ class Event(ProviderMixin, models.Model):
         verbose_name = 'event'
         verbose_name_plural = 'event'
         ordering = ('-start_time',)
+        indexes = ProviderMixin.Meta.indexes + [
+            models.Index(fields=('name',)),
+            models.Index(fields=('min_ticket_price',)),
+            models.Index(fields=('max_ticket_price',)),
+            models.Index(fields=('start_time',)),
+            models.Index(fields=('finish_time',)),
+        ]

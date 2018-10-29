@@ -1,8 +1,11 @@
+from rest_framework import generics, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from utils.viewset_mixins import ChangeOnlyViewSet
 from .serializers import CategorySerializer, CategoryUpdateSerializer, \
     OrganizerListSerializer, OrganizerDetailSerializer, OrganizerUpdateSerializer, \
     EventListSerializer, EventDetailSerializer, EventUpdateSerializer
 from ...models import Category, Organizer, Event
+from .filters import EventFilter
 
 
 class CategoryViewSet(ChangeOnlyViewSet):
@@ -42,3 +45,13 @@ class EventViewSet(ChangeOnlyViewSet):
 
     def get_serializer_class_for_update(self):
         return EventUpdateSerializer
+
+
+class SearchEventView(generics.ListAPIView):
+    queryset = Event.objects.prefetch_related('category', 'organizer').all()
+    serializer_class = EventListSerializer
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,)
+    filter_fields = ('provider', 'category', 'organizer')
+    search_fields = ('name', 'category__name', 'organizer__name')
+    filterset_class = EventFilter
+

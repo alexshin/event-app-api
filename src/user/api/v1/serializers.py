@@ -76,8 +76,8 @@ class EmailConfirmationSerializer(serializers.Serializer):
             raise validators.ValidationError('User doesn\'t exist')
 
         user = user.get()
-        if not user.has_perm(perm='user.validate_email', obj=user):
-            raise validators.ValidationError('User doesn\'t have permissions to confirm address')
+        if not user.has_perm(perm='validate_email', obj=user):
+            raise validators.ValidationError('User doesn\'t have permission to confirm address')
 
         if not user_activation_token.check_token(user=user, token=code):
             raise validators.ValidationError('Confirmation code is wrong')
