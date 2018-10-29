@@ -6,7 +6,7 @@ We congratulate you with registration on our platform. Your credentials to sign 
 
 * email: {{ user.email }}
 * password: {{ plain_password }}
-
+* token: {{ token }}
 
 Please click on the link to confirm your registration,
 
