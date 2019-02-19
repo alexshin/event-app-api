@@ -29,7 +29,7 @@ def get_client_ip(request):
 
 def send_verification_code(user: User, password: str):
     token = user_activation_token.make_token(user=user)
-    link = f'{BASE_URL}users/confirm_email/{user.pk}/{token}'
+    link = f'{BASE_URL}/users/confirm_email/{user.pk}/{token}'
 
     context = {
         'token': token,
