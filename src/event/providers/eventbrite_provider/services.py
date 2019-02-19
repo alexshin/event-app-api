@@ -18,7 +18,7 @@ class EventbriteProviderService(EventProviderService):
     def init_iterator(self, count=200):
         return EventbritePaginatedIterator(
             api_client=self.client,
-            query_args={'expand': 'organizer,ticket_availability,category', 'sort_by': '-date'},
+            query_args={'expand': 'organizer,ticket_availability,category'},  # 'sort_by': '-date'
             root_key='events',
             api_method='event_search',
             count=count
