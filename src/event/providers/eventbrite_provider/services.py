@@ -98,10 +98,12 @@ class EventbriteProviderService(EventProviderService):
 
             data = self.clean_data_event(event)
 
-            processed_event = self.upsert_event(id_=event['id'], category_id=category_id, organizer_id=organizer_id,
-                                                **data)
-
-            processed_event_callback(processed_event)
+            try:
+                processed_event = self.upsert_event(id_=event['id'], category_id=category_id,
+                                                    organizer_id=organizer_id, **data)
+                processed_event_callback(processed_event)
+            except:
+                pass
 
 
 class EventbritePaginatedIterator(Iterator):
