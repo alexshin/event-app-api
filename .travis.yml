@@ -1,0 +1,18 @@
+language: python
+python:
+  - "3.7"
+  - "3.8"
+services:
+  - postgresql
+env:
+  - APP_ENVITONMENT=test
+  - DJANGO_TEST_DB_NAME=test_db
+  - DJANGO_TEST_DB_USER=postgres
+  - DJANGO_TEST_DB_PASS=""
+  - DJANGO_TEST_DB_HOST=localhost
+install:
+  - pip install -r requirements.txt
+before_script:
+  - psql -c 'create database test_db;' -U postgres
+script:
+  - ./manage.py test
