@@ -5,11 +5,8 @@ python:
 services:
   - postgresql
 env:
-  - APP_ENVITONMENT=test
-  - DJANGO_TEST_DB_NAME=test_db
-  - DJANGO_TEST_DB_USER=postgres
-  - DJANGO_TEST_DB_PASS=""
-  - DJANGO_TEST_DB_HOST=localhost
+  - APP_ENVIRONMENT=test DJANGO_TEST_DB_NAME=test_db DJANGO_TEST_DB_USER=postgres DJANGO_TEST_DB_PASS="" DJANGO_TEST_DB_HOST=localhost
+  - APP_ENVIRONMENT=test DJANGO_TEST_DB_NAME=test_db DJANGO_TEST_DB_USER=postgres DJANGO_TEST_DB_PASS="" DJANGO_TEST_DB_HOST=localhost
 install:
   - pip install -r requirements.txt
 before_script:
