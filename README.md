@@ -1,5 +1,7 @@
 # Event-app API
 
+[![Build Status](https://travis-ci.org/alexshin/event-app-api.svg?branch=master)](https://travis-ci.org/alexshin/event-app-api)
+
 This repository contains source code of simple application to get 
 [Eventbrite](https://www.eventbrite.com) data via their API v3.
 
