@@ -182,19 +182,6 @@ class UserRegistrationTestCase(APITestCase):
 
         self.assertFalse(self.test_user.has_perm('user.validate_email', self.test_user))
 
-    def test_email_confirmation_empty_perms(self):
-        context, token = self._get_context_and_token()
-
-        remove_perm('user.validate_email', self.test_user, self.test_user)
-
-        # Everything is OK
-        data = {
-            'user_id': str(context.get('user').pk),
-            'code': token
-        }
-        response = self.client.post(self.email_confirm_url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
 
 class PasswordRecoveryTestCase(APITestCase):
     def setUp(self):
