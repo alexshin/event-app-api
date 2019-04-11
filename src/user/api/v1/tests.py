@@ -6,8 +6,6 @@ from rest_framework import status
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
-from guardian.shortcuts import remove_perm
-
 from ...utils import send_verification_code, send_password_recovery_code
 
 User = get_user_model()
